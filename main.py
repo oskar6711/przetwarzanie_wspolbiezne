@@ -66,13 +66,7 @@ def multiproccess_sort(array, proccess_amount):
     sorted_subarray = queue.get()
     sorted_subarrays.extend(sorted_subarray)
   return sorted(sorted_subarrays)
-  
-# Wnioski:
-# - dla 100 i 1000 elementowych tablic zwykle sortowanie babelkowe bylo najszybsze
-# - dla 100 i 1000 elementowych tablic szybsze bylo wykonanie sortowania na 5 procesach niz na 10
-# - wykonanie sortowania na 5 procesach 1000 elementowej tablicy jest delikatnie szybsze niz posortowanie na 5 procesach 100 elementowej tablicy
-# - dla 10000 elementowej tablicy zwykle sortowanie babelkowe trwalo bardzo dlugo - 5 sekund
-# - dla 10000 elementowej tablicy sortowanie na 10 procesach bylo dwa razy szybsze niz sortowanie na 5 procesach
+
 
 if __name__ == '__main__':
   bubble_sort100_exec_time = bubble_sort_with_time(arr_100)[1]
@@ -101,3 +95,20 @@ if __name__ == '__main__':
   print('----------------------------------')
   print(f'Wieloprocesowe(5) sortowanie babelkowe tablicy 10000 elementowej - czas wykonania: {multiproccess_sort10000_5_exec_time}')
   print(f'Wieloprocesowe(10) sortowanie babelkowe tablicy 10000 elementowej - czas wykonania: {multiproccess_sort10000_10_exec_time}')
+
+# Obserwacje:
+# - dla 100 i 1000 elementowych tablic zwykle sortowanie babelkowe bylo najszybsze
+# - dla 100 i 1000 elementowych tablic szybsze bylo wykonanie sortowania na 5 procesach niz na 10
+# - wykonanie sortowania na 5 procesach 1000 elementowej tablicy jest delikatnie szybsze niz posortowanie na 5 procesach 100 elementowej tablicy
+# - dla 10000 elementowej tablicy zwykle sortowanie babelkowe trwalo bardzo dlugo - 5 sekund
+# - dla 10000 elementowej tablicy sortowanie na 10 procesach bylo dwa razy szybsze niz sortowanie na 5 procesach
+
+# Ogółem:
+# - dla tablic o malych rozmiarach (w przykladzie < 1000) nie oplaca sie uzywac sortownia wieloprocesowego
+# - dla tablic o malych rozmiarach (w przykladzie < 1000) uzycie wiekszej liczby procesow zmniejszy wydajnosc programu
+# - dla tablic o duzych rozmiarach (w przykladzie > 10000) zwykle sortowanie babelkowe wypada duzo gorzej wydajnosciowo niz sortowanie wieloprocesowe
+# - dla tablic o duzych rozmiarach (w przykladzie > 10000) uzycie wiekszej liczby procesow zwiekszy wydajnosc programu
+
+# Wnioski:
+# - zanim zdecydujemy sie skorzystac z sortowania na wielu procesach trzeba zastanowic sie czy tablica jest wystarczajaco duza
+# - decydujac sie na sortowanie wieloprocesowe, trzeba odpowiednio dobrac liczbe procesow do rozmiaru sortowanej tablicy
