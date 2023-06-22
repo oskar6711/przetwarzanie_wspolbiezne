@@ -85,7 +85,7 @@ if __name__ == '__main__':
   
   print(f'Sortowanie babelkowe tablicy 100 elementowej - czas wykonania: {bubble_sort100_exec_time}')
   print(f'Sortowanie babelkowe tablicy 1000 elementowej - czas wykonania: {bubble_sort1000_exec_time}')
-  print(f'Sortowanie babelkowe tablicy 1000 elementowej - czas wykonania: {bubble_sort10000_exec_time}')
+  print(f'Sortowanie babelkowe tablicy 10000 elementowej - czas wykonania: {bubble_sort10000_exec_time}')
   print('----------------------------------')
   print(f'Wieloprocesowe(5) sortowanie babelkowe tablicy 100 elementowej - czas wykonania: {multiproccess_sort100_5_exec_time}')
   print(f'Wieloprocesowe(10) sortowanie babelkowe tablicy 100 elementowej - czas wykonania: {multiproccess_sort100_10_exec_time}')
