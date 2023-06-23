@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 from multiprocessing import Queue, Process
 from random import randint
 
-arr_100 = [randint(0, 99) for x in range(100)]
-arr_1000 = [randint(0, 99) for x in range(1000)]
-arr_10000 = [randint(0, 99) for x in range(10000)]
+arr_100 = [randint(0, 99) for _ in range(100)]
+arr_1000 = [randint(0, 99) for _ in range(1000)]
+arr_10000 = [randint(0, 99) for _ in range(10000)]
 
 
 def get_execution_time(func):
@@ -51,7 +51,7 @@ def multiprocess_sort(array, process_amount):
       end_idx = None
     subarray = array[start_idx:end_idx]
     queue = Queue()
-    proces = Process(target=bubble_sort_queue_handler, args=(array[start_idx:end_idx], queue))
+    proces = Process(target=bubble_sort_queue_handler, args=(subarray, queue))
     processes.append(proces)
     queues.append(queue)
 
@@ -83,25 +83,28 @@ def bubble_sort_diagram(exec_time100, exec_time1000, exec_time10000):
   show_diagram('Bubble sort execution time vs. array length', 'Array length', 'Execution time', array_lengths, exec_times)
 
 
-def multiprocess_sort_diagram(arr_length, exec_time5, exec_time10):
-  num_of_processes = [5, 10]
-  exec_times = [exec_time5, exec_time10]
+def multiprocess_sort_diagram(arr_length, exec_time2, exec_time5, exec_time10):
+  num_of_processes = [2, 5, 10]
+  exec_times = [exec_time2, exec_time5, exec_time10]
   show_diagram(f'{arr_length} elements array multiprocess sort execution time vs. number of processes', 'Number of processes', 'Execution time', num_of_processes, exec_times)
 
 
 if __name__ == '__main__':
-  bubble_sort100_result, bubble_sort100_exec_time = bubble_sort_with_time(arr_100)
-  bubble_sort1000_result, bubble_sort1000_exec_time = bubble_sort_with_time(arr_1000)
-  bubble_sort10000_result, bubble_sort10000_exec_time = bubble_sort_with_time(arr_10000)
+  bubble_sort100_exec_time = bubble_sort_with_time(arr_100)
+  bubble_sort1000_exec_time = bubble_sort_with_time(arr_1000)
+  bubble_sort10000_exec_time = bubble_sort_with_time(arr_10000)
 
-  multiprocess_sort100_5_result, multiprocess_sort100_5_exec_time = multiprocess_sort(arr_100, 5)
-  multiprocess_sort100_5_result, multiprocess_sort100_10_exec_time = multiprocess_sort(arr_100, 10)
+  multiprocess_sort100_2_exec_time = multiprocess_sort(arr_100, 2)
+  multiprocess_sort100_5_exec_time = multiprocess_sort(arr_100, 5)
+  multiprocess_sort100_10_exec_time = multiprocess_sort(arr_100, 10)
 
-  multiprocess_sort1000_5_result, multiprocess_sort1000_5_exec_time = multiprocess_sort(arr_1000, 5)
-  multiprocess_sort1000_10_result, multiprocess_sort1000_10_exec_time = multiprocess_sort(arr_1000, 10)
+  multiprocess_sort1000_2_exec_time = multiprocess_sort(arr_1000, 2)
+  multiprocess_sort1000_5_exec_time = multiprocess_sort(arr_1000, 5)
+  multiprocess_sort1000_10_exec_time = multiprocess_sort(arr_1000, 10)
 
-  multiprocess_sort10000_5_result, multiprocess_sort10000_5_exec_time = multiprocess_sort(arr_10000, 5)
-  multiprocess_sort10000_5_result, multiprocess_sort10000_10_exec_time = multiprocess_sort(arr_10000, 10)
+  multiprocess_sort10000_2_exec_time = multiprocess_sort(arr_10000, 2)
+  multiprocess_sort10000_5_exec_time = multiprocess_sort(arr_10000, 5)
+  multiprocess_sort10000_10_exec_time = multiprocess_sort(arr_10000, 10)
   
   
   print(f'Sortowanie babelkowe tablicy 100 elementowej - czas wykonania: {bubble_sort100_exec_time}')
@@ -110,19 +113,22 @@ if __name__ == '__main__':
   bubble_sort_diagram(bubble_sort100_exec_time, bubble_sort1000_exec_time, bubble_sort10000_exec_time)
   
   print('----------------------------------')
+  print(f'Wieloprocesowe(2) sortowanie babelkowe tablicy 100 elementowej - czas wykonania: {multiprocess_sort100_2_exec_time}')
   print(f'Wieloprocesowe(5) sortowanie babelkowe tablicy 100 elementowej - czas wykonania: {multiprocess_sort100_5_exec_time}')
   print(f'Wieloprocesowe(10) sortowanie babelkowe tablicy 100 elementowej - czas wykonania: {multiprocess_sort100_10_exec_time}')
-  multiprocess_sort_diagram(100, multiprocess_sort100_5_exec_time, multiprocess_sort100_10_exec_time)  
+  multiprocess_sort_diagram(100, multiprocess_sort1000_2_exec_time, multiprocess_sort100_5_exec_time, multiprocess_sort100_10_exec_time)  
 
   print('----------------------------------')
+  print(f'Wieloprocesowe(2) sortowanie babelkowe tablicy 1000 elementowej - czas wykonania: {multiprocess_sort1000_2_exec_time}')
   print(f'Wieloprocesowe(5) sortowanie babelkowe tablicy 1000 elementowej - czas wykonania: {multiprocess_sort1000_5_exec_time}')
   print(f'Wieloprocesowe(10) sortowanie babelkowe tablicy 1000 elementowej - czas wykonania: {multiprocess_sort1000_10_exec_time}')
-  multiprocess_sort_diagram(1000, multiprocess_sort1000_5_exec_time, multiprocess_sort1000_10_exec_time)  
+  multiprocess_sort_diagram(1000, multiprocess_sort1000_2_exec_time, multiprocess_sort1000_5_exec_time, multiprocess_sort1000_10_exec_time)  
 
   print('----------------------------------')
+  print(f'Wieloprocesowe(2) sortowanie babelkowe tablicy 10000 elementowej - czas wykonania: {multiprocess_sort10000_2_exec_time}')
   print(f'Wieloprocesowe(5) sortowanie babelkowe tablicy 10000 elementowej - czas wykonania: {multiprocess_sort10000_5_exec_time}')
   print(f'Wieloprocesowe(10) sortowanie babelkowe tablicy 10000 elementowej - czas wykonania: {multiprocess_sort10000_10_exec_time}')
-  multiprocess_sort_diagram(10000, multiprocess_sort10000_5_exec_time, multiprocess_sort10000_10_exec_time)  
+  multiprocess_sort_diagram(10000, multiprocess_sort1000_2_exec_time, multiprocess_sort10000_5_exec_time, multiprocess_sort10000_10_exec_time)  
 
 
 # Obserwacje:
