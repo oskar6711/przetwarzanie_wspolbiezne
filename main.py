@@ -90,60 +90,49 @@ def multiprocess_sort_diagram(arr_length, exec_time2, exec_time5, exec_time10):
 
 
 if __name__ == '__main__':
-  bubble_sort100_exec_time = bubble_sort_with_time(arr_100)
-  bubble_sort1000_exec_time = bubble_sort_with_time(arr_1000)
-  bubble_sort10000_exec_time = bubble_sort_with_time(arr_10000)
-
-  multiprocess_sort100_2_exec_time = multiprocess_sort(arr_100, 2)
-  multiprocess_sort100_5_exec_time = multiprocess_sort(arr_100, 5)
-  multiprocess_sort100_10_exec_time = multiprocess_sort(arr_100, 10)
-
-  multiprocess_sort1000_2_exec_time = multiprocess_sort(arr_1000, 2)
-  multiprocess_sort1000_5_exec_time = multiprocess_sort(arr_1000, 5)
-  multiprocess_sort1000_10_exec_time = multiprocess_sort(arr_1000, 10)
-
-  multiprocess_sort10000_2_exec_time = multiprocess_sort(arr_10000, 2)
-  multiprocess_sort10000_5_exec_time = multiprocess_sort(arr_10000, 5)
-  multiprocess_sort10000_10_exec_time = multiprocess_sort(arr_10000, 10)
-  
-  
+  bubble_sort100_exec_time = bubble_sort_with_time(arr_100)[1]
   print(f'Sortowanie babelkowe tablicy 100 elementowej - czas wykonania: {bubble_sort100_exec_time}')
+
+  bubble_sort1000_exec_time = bubble_sort_with_time(arr_1000)[1]
   print(f'Sortowanie babelkowe tablicy 1000 elementowej - czas wykonania: {bubble_sort1000_exec_time}')
+
+  bubble_sort10000_exec_time = bubble_sort_with_time(arr_10000)[1]
   print(f'Sortowanie babelkowe tablicy 10000 elementowej - czas wykonania: {bubble_sort10000_exec_time}')
-  bubble_sort_diagram(bubble_sort100_exec_time, bubble_sort1000_exec_time, bubble_sort10000_exec_time)
-  
+
+  bubble_sort_diagram(bubble_sort100_exec_time, bubble_sort1000_exec_time, bubble_sort10000_exec_time) 
   print('----------------------------------')
+
+  multiprocess_sort100_2_exec_time = multiprocess_sort(arr_100, 2)[1]
   print(f'Wieloprocesowe(2) sortowanie babelkowe tablicy 100 elementowej - czas wykonania: {multiprocess_sort100_2_exec_time}')
+
+  multiprocess_sort100_5_exec_time = multiprocess_sort(arr_100, 4)[1]
   print(f'Wieloprocesowe(5) sortowanie babelkowe tablicy 100 elementowej - czas wykonania: {multiprocess_sort100_5_exec_time}')
+
+  multiprocess_sort100_10_exec_time = multiprocess_sort(arr_100, 6)[1]
   print(f'Wieloprocesowe(10) sortowanie babelkowe tablicy 100 elementowej - czas wykonania: {multiprocess_sort100_10_exec_time}')
-  multiprocess_sort_diagram(100, multiprocess_sort1000_2_exec_time, multiprocess_sort100_5_exec_time, multiprocess_sort100_10_exec_time)  
 
+  multiprocess_sort_diagram(100, multiprocess_sort100_2_exec_time, multiprocess_sort100_5_exec_time, multiprocess_sort100_10_exec_time)  
   print('----------------------------------')
+
+  multiprocess_sort1000_2_exec_time = multiprocess_sort(arr_1000, 2)[1]
   print(f'Wieloprocesowe(2) sortowanie babelkowe tablicy 1000 elementowej - czas wykonania: {multiprocess_sort1000_2_exec_time}')
+
+  multiprocess_sort1000_5_exec_time = multiprocess_sort(arr_1000, 4)[1]
   print(f'Wieloprocesowe(5) sortowanie babelkowe tablicy 1000 elementowej - czas wykonania: {multiprocess_sort1000_5_exec_time}')
+
+  multiprocess_sort1000_10_exec_time = multiprocess_sort(arr_1000, 6)[1]
   print(f'Wieloprocesowe(10) sortowanie babelkowe tablicy 1000 elementowej - czas wykonania: {multiprocess_sort1000_10_exec_time}')
+
   multiprocess_sort_diagram(1000, multiprocess_sort1000_2_exec_time, multiprocess_sort1000_5_exec_time, multiprocess_sort1000_10_exec_time)  
-
   print('----------------------------------')
+
+  multiprocess_sort10000_2_exec_time = multiprocess_sort(arr_10000, 4)[1]
   print(f'Wieloprocesowe(2) sortowanie babelkowe tablicy 10000 elementowej - czas wykonania: {multiprocess_sort10000_2_exec_time}')
+
+  multiprocess_sort10000_5_exec_time = multiprocess_sort(arr_10000, 6)[1]
   print(f'Wieloprocesowe(5) sortowanie babelkowe tablicy 10000 elementowej - czas wykonania: {multiprocess_sort10000_5_exec_time}')
+
+  multiprocess_sort10000_10_exec_time = multiprocess_sort(arr_10000, 8)[1]
   print(f'Wieloprocesowe(10) sortowanie babelkowe tablicy 10000 elementowej - czas wykonania: {multiprocess_sort10000_10_exec_time}')
-  multiprocess_sort_diagram(10000, multiprocess_sort1000_2_exec_time, multiprocess_sort10000_5_exec_time, multiprocess_sort10000_10_exec_time)  
 
-
-# Obserwacje:
-# - dla 100 i 1000 elementowych tablic zwykle sortowanie babelkowe bylo najszybsze
-# - dla 100 i 1000 elementowych tablic szybsze bylo wykonanie sortowania na 5 procesach niz na 10
-# - wykonanie sortowania na 5 procesach 1000 elementowej tablicy jest delikatnie szybsze niz posortowanie na 5 procesach 100 elementowej tablicy
-# - dla 10000 elementowej tablicy zwykle sortowanie babelkowe trwalo bardzo dlugo - 5 sekund
-# - dla 10000 elementowej tablicy sortowanie na 10 procesach bylo dwa razy szybsze niz sortowanie na 5 procesach
-
-# Ogółem:
-# - dla tablic o malych rozmiarach (w przykladzie < 1000) nie oplaca sie uzywac sortownia wieloprocesowego
-# - dla tablic o malych rozmiarach (w przykladzie < 1000) uzycie wiekszej liczby procesow zmniejszy wydajnosc programu
-# - dla tablic o duzych rozmiarach (w przykladzie > 10000) zwykle sortowanie babelkowe wypada duzo gorzej wydajnosciowo niz sortowanie wieloprocesowe
-# - dla tablic o duzych rozmiarach (w przykladzie > 10000) uzycie wiekszej liczby procesow zwiekszy wydajnosc programu
-
-# Wnioski:
-# - zanim zdecydujemy sie skorzystac z sortowania na wielu procesach trzeba zastanowic sie czy tablica jest wystarczajaco duza
-# - decydujac sie na sortowanie wieloprocesowe, trzeba odpowiednio dobrac liczbe procesow do rozmiaru sortowanej tablicy
+  multiprocess_sort_diagram(10000, multiprocess_sort1000_2_exec_time, multiprocess_sort10000_5_exec_time, multiprocess_sort10000_10_exec_time)
